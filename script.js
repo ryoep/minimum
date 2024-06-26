@@ -47,12 +47,14 @@
 
     function mup(e) {
         var drag = document.getElementsByClassName("drag")[0];
-
-        document.body.removeEventListener("mousemove", mmove, false);
-        drag.removeEventListener("mouseup", mup, false);
-        document.body.removeEventListener("touchmove", mmove, false);
-        drag.removeEventListener("touchend", mup, false);
-
-        drag.classList.remove("drag");
+    
+        if (drag) {
+            document.body.removeEventListener("mousemove", mmove, false);
+            drag.removeEventListener("mouseup", mup, false);
+            document.body.removeEventListener("touchmove", mmove, false);
+            drag.removeEventListener("touchend", mup, false);
+    
+            drag.classList.remove("drag");
+        }
     }
 })();
