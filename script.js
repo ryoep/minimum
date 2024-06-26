@@ -15,7 +15,7 @@
     //四角形の複製
     container.addEventListener('contextmenu', function(event) {
         event.preventDefault();
-        if (event.target.classList.contains('square')) {
+        if (event.target.classList.contains('drag-and-drop')) {
             var newSquare = event.target.cloneNode(true);
             newSquare.style.top = `${event.clientY - container.offsetTop}px`;
             newSquare.style.left = `${event.clientX - container.offsetLeft}px`;
