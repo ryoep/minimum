@@ -1,80 +1,70 @@
-(function(){
+(function() {
+    var container = document.getElementById('container'); // 四角形を配置するコンテナ要素を取得する
 
-    //要素の取得
-    var elements = document.getElementsByClassName("drag-and-drop");
+    container.addEventListener('touchstart', function(e) {
+        var touch = e.touches[0]; // 最初のタッチの情報を取得する
 
-    //要素内のクリックされた位置を取得するグローバル（のような）変数
-    var x;
-    var y;
+        // タッチされた位置に新しい四角形を作成する
+        var newSquare = document.createElement('div');
+        newSquare.classList.add('drag-and-drop'); // 同じクラスを設定する
+        newSquare.style.position = 'absolute';
+        newSquare.style.width = '100px';
+        newSquare.style.height = '100px';
+        newSquare.style.backgroundColor = 'green'; // 例として緑色の背景色を設定する
+        newSquare.style.left = touch.pageX + 'px'; // タッチされたX座標に配置する
+        newSquare.style.top = touch.pageY + 'px'; // タッチされたY座標に配置する
 
-    //マウスが要素内で押されたとき、又はタッチされたとき発火
-    for(var i = 0; i < elements.length; i++) {
-        elements[i].addEventListener("mousedown", mdown, false);
-        elements[i].addEventListener("touchstart", mdown, false);
-    }
+        container.appendChild(newSquare); // 新しい四角形をコンテナに追加する
 
-    //マウスが押された際の関数
+        // タッチした要素をドラッグ可能にする処理を追加する（以前のコードを適用）
+        newSquare.addEventListener('mousedown', mdown, false);
+        newSquare.addEventListener('touchstart', mdown, false);
+    });
+
     function mdown(e) {
-
-        //クラス名に .drag を追加
         this.classList.add("drag");
 
-        //タッチデイベントとマウスのイベントの差異を吸収
         if(e.type === "mousedown") {
             var event = e;
         } else {
             var event = e.changedTouches[0];
         }
 
-        //要素内の相対座標を取得
-        x = event.pageX - this.offsetLeft;
-        y = event.pageY - this.offsetTop;
+        var x = event.pageX - this.offsetLeft;
+        var y = event.pageY - this.offsetTop;
 
-        //ムーブイベントにコールバック
         document.body.addEventListener("mousemove", mmove, false);
         document.body.addEventListener("touchmove", mmove, false);
-    }
 
-    //マウスカーソルが動いたときに発火
-    function mmove(e) {
+        function mmove(e) {
+            var drag = document.getElementsByClassName("drag")[0];
 
-        //ドラッグしている要素を取得
-        var drag = document.getElementsByClassName("drag")[0];
+            if(e.type === "mousemove") {
+                var event = e;
+            } else {
+                var event = e.changedTouches[0];
+            }
 
-        //同様にマウスとタッチの差異を吸収
-        if(e.type === "mousemove") {
-            var event = e;
-        } else {
-            var event = e.changedTouches[0];
+            e.preventDefault();
+
+            drag.style.top = event.pageY - y + "px";
+            drag.style.left = event.pageX - x + "px";
+
+            drag.addEventListener("mouseup", mup, false);
+            document.body.addEventListener("mouseleave", mup, false);
+            drag.addEventListener("touchend", mup, false);
+            document.body.addEventListener("touchleave", mup, false);
         }
 
-        //フリックしたときに画面を動かさないようにデフォルト動作を抑制
-        e.preventDefault();
+        function mup(e) {
+            var drag = document.getElementsByClassName("drag")[0];
 
-        //マウスが動いた場所に要素を動かす
-        drag.style.top = event.pageY - y + "px";
-        drag.style.left = event.pageX - x + "px";
+            document.body.removeEventListener("mousemove", mmove, false);
+            drag.removeEventListener("mouseup", mup, false);
+            document.body.removeEventListener("touchmove", mmove, false);
+            drag.removeEventListener("touchend", mup, false);
 
-        //マウスボタンが離されたとき、またはカーソルが外れたとき発火
-        drag.addEventListener("mouseup", mup, false);
-        document.body.addEventListener("mouseleave", mup, false);
-        drag.addEventListener("touchend", mup, false);
-        document.body.addEventListener("touchleave", mup, false);
-
+            drag.classList.remove("drag");
+        }
     }
-
-    //マウスボタンが上がったら発火
-    function mup(e) {
-        var drag = document.getElementsByClassName("drag")[0];
-
-        //ムーブベントハンドラの消去
-        document.body.removeEventListener("mousemove", mmove, false);
-        drag.removeEventListener("mouseup", mup, false);
-        document.body.removeEventListener("touchmove", mmove, false);
-        drag.removeEventListener("touchend", mup, false);
-
-        //クラス名 .drag も消す
-        drag.classList.remove("drag");
-    }
-
-})()
+})();
