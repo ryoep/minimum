@@ -50,11 +50,14 @@
     
         if (drag) {
             document.body.removeEventListener("mousemove", mmove, false);
-            drag.removeEventListener("mouseup", mup, false);
             document.body.removeEventListener("touchmove", mmove, false);
+            drag.removeEventListener("mouseup", mup, false);
+            document.body.removeEventListener("mouseleave", mup, false);
             drag.removeEventListener("touchend", mup, false);
+            document.body.removeEventListener("touchleave", mup, false);
     
             drag.classList.remove("drag");
         }
     }
+    
 })();
