@@ -1,7 +1,7 @@
 (function(){
 
     //要素の取得
-    var elements = document.getElementsByClassName("drag-and-drop");
+    var elements = document.getElementsByClassName("container");
 
     //要素内のクリックされた位置を取得するグローバル（のような）変数
     var x;
@@ -16,7 +16,7 @@
         //四角形の複製
         container.addEventListener('contextmenu', function(event) {
             event.preventDefault();
-            if (event.target.classList.contains('red-box')) {
+            if (event.target.classList.contains('square')) {
                 var newSquare = event.target.cloneNode(true);
                 newSquare.style.top = `${event.clientY - container.offsetTop}px`;
                 newSquare.style.left = `${event.clientX - container.offsetLeft}px`;
