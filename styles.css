@@ -1,9 +1,22 @@
-.drag-and-drop {
-    cursor: move;
-    position: absolute;
-    z-index: 1000;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
 }
 
-.drag {
-    z-index: 1001;
+#container {
+    position: relative;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    margin: 10px;
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
 }
