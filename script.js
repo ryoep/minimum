@@ -30,11 +30,7 @@
         this.classList.add("drag");
 
         //タッチデイベントとマウスのイベントの差異を吸収            
-        if(e.type === "mousedown") {
-             var event = e;
-        } else {
-                var event = e.changedTouches[0];
-            }
+        var event = e.type === "mousedown" ? e : e.changedTouches[0];
 
         //要素内の相対座標を取得    
         x = event.pageX - this.offsetLeft;
@@ -52,11 +48,7 @@
         var drag = document.getElementsByClassName("drag")[0];
 
         //同様にマウスとタッチの差異を吸収
-        if(e.type === "mousemove") {
-            var event = e;
-        } else {
-            var event = e.changedTouches[0];
-        }
+        var event = e.type === "mousemove" ? e : e.changedTouches[0];
 
         //フリックしたときに画面を動かさないようにデフォルト動作を抑制
         e.preventDefault();
