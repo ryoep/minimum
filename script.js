@@ -63,6 +63,7 @@
         drag.style.top = event.pageY - y + "px";
         drag.style.left = event.pageX - x + "px";
 
+        //マウスボタンが離されたとき、またはカーソルが外れたとき発火
         drag.addEventListener("mouseup", mup, false);
         document.body.addEventListener("mouseleave", mup, false);
         drag.addEventListener("touchend", mup, false);
@@ -72,16 +73,20 @@
     //マウスボタンが上がったら発火
     function mup(e) {
         var drag = document.getElementsByClassName("drag")[0];
+
+        //ムーブベントハンドラの消去
         document.body.removeEventListener("mousemove", mmove, false);
         drag.removeEventListener("mouseup", mup, false);
         document.body.removeEventListener("touchmove", mmove, false);
         drag.removeEventListener("touchend", mup, false);
+
+        //クラス名 .drag も消す
         drag.classList.remove("drag");
     }
 
     // 初期四角形の設定
-    var elements = document.getElementsByClassName("drag-and-drop");
-    for (var i = 0; i < elements.length; i++) {
-        setDragAndDrop(elements[i]);
-    }
+    //var elements = document.getElementsByClassName("drag-and-drop");
+    //for (var i = 0; i < elements.length; i++) {
+    //    setDragAndDrop(elements[i]);
+    //}
 })();
