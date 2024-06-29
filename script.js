@@ -7,9 +7,9 @@
     var y;
 
     //ドラッグアンドドロップのイベント設定
-    function setDragAndDrop(element) {
-        element.addEventListener("mousedown", mdown, false);
-        element.addEventListener("touchstart", mdown, false);
+    for(var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener("mousedown", mdown, false);
+        elements[i].addEventListener("touchstart", mdown, false);
     }
 
     //四角形の複製
