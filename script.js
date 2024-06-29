@@ -45,9 +45,21 @@
 
     //マウスカーソルが動いたときに発火
     function mmove(e) {
+
+        //ドラッグしている要素を取得
         var drag = document.getElementsByClassName("drag")[0];
-        var event = e.type === "mousemove" ? e : e.changedTouches[0];
+
+        //同様にマウスとタッチの差異を吸収
+        if(e.type === "mousemove") {
+            var event = e;
+        } else {
+            var event = e.changedTouches[0];
+        }
+
+        //フリックしたときに画面を動かさないようにデフォルト動作を抑制
         e.preventDefault();
+
+        //マウスが動いた場所に要素を動かす
         drag.style.top = event.pageY - y + "px";
         drag.style.left = event.pageX - x + "px";
 
