@@ -36,9 +36,11 @@
                 var event = e.changedTouches[0];
             }
 
+        //要素内の相対座標を取得    
         x = event.pageX - this.offsetLeft;
         y = event.pageY - this.offsetTop;
 
+        //ムーブイベントにコールバック
         document.body.addEventListener("mousemove", mmove, false);
         document.body.addEventListener("touchmove", mmove, false);
     }
