@@ -87,8 +87,8 @@
     }
 
     // 初期四角形の設定
-    //var elements = document.getElementsByClassName("drag-and-drop");
-    //for (var i = 0; i < elements.length; i++) {
-    //    setDragAndDrop(elements[i]);
-    //}
+    var elements = document.getElementsByClassName("drag-and-drop");
+    for (var i = 0; i < elements.length; i++) {
+        setDragAndDrop(elements[i]);
+    }
 })();
