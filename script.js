@@ -26,8 +26,16 @@
 
     //マウスが押された際の関数
     function mdown(e) {
-        var event = e.type === "mousedown" ? e : e.changedTouches[0];
+
         this.classList.add("drag");
+
+        //タッチデイベントとマウスのイベントの差異を吸収            
+        if(e.type === "mousedown") {
+             var event = e;
+        } else {
+                var event = e.changedTouches[0];
+            }
+
         x = event.pageX - this.offsetLeft;
         y = event.pageY - this.offsetTop;
 
