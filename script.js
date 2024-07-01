@@ -26,7 +26,12 @@
 
     //マウスが押された際の関数
     function mdown(e) {
-        var event = e.type === "mousedown" ? e : e.changedTouches[0];
+        //タッチデイベントとマウスのイベントの差異を吸収
+        if(e.type === "mousedown") {
+            var event = e;
+        } else {
+            var event = e.changedTouches[0];
+        }
         this.classList.add("drag");
         x = event.pageX - this.offsetLeft;
         y = event.pageY - this.offsetTop;
@@ -38,7 +43,12 @@
     //マウスカーソルが動いたときに発火
     function mmove(e) {
         var drag = document.getElementsByClassName("drag")[0];
-        var event = e.type === "mousemove" ? e : e.changedTouches[0];
+        //同様にマウスとタッチの差異を吸収
+        if(e.type === "mousemove") {
+            var event = e;
+        } else {
+            var event = e.changedTouches[0];
+        }
         e.preventDefault();
         drag.style.top = event.pageY - y + "px";
         drag.style.left = event.pageX - x + "px";
@@ -60,8 +70,8 @@
     }
 
     // 初期四角形の設定
-    var elements = document.getElementsByClassName("drag-and-drop");
-    for (var i = 0; i < elements.length; i++) {
-        setDragAndDrop(elements[i]);
-    }
+//    var elements = document.getElementsByClassName("drag-and-drop");
+//    for (var i = 0; i < elements.length; i++) {
+//        setDragAndDrop(elements[i]);
+//    }
 })();
