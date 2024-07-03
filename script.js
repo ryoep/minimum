@@ -12,8 +12,6 @@
         element.addEventListener("touchstart", mdown, false);
     }
 
-    setDragAndDrop(square);
-
     //四角形の複製
     //container要素にcontextmenuイベントリスナーを追加
     container.addEventListener('contextmenu', function(event) {
