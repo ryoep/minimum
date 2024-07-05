@@ -12,6 +12,12 @@
         element.addEventListener("touchstart", mdown, false);
     }
 
+        //マウスが要素内で押されたとき、又はタッチされたとき発火
+        for(var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener("mousedown", mdown, false);
+            elements[i].addEventListener("touchstart", mdown, false);
+        }
+
     //四角形の複製
     container.addEventListener('contextmenu', function(event) {
         event.preventDefault();
