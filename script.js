@@ -13,8 +13,10 @@
     }
 
     // 初期四角形の設定
-    var elements = document.getElementsByClassName("drag-and-drop");
+    //squareである全ての要素を取得し、elementsに格納
+    var elements = document.getElementsByClassName("square");
     for (var i = 0; i < elements.length; i++) {
+        //各要素に対してsetDragAndDropを適用
         setDragAndDrop(elements[i]);
     }
 
