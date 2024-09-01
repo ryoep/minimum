@@ -20,3 +20,7 @@ body {
     position: absolute;
     cursor: pointer;
 }
+
+.newsquare {
+    position: absolute;
+}

@@ -18,9 +18,9 @@
     for (var i = 0; i < elements.length; i++) {
         //各要素に対してsetDragAndDropを適用
         setDragAndDrop(elements[i]);
-    }
+    } 
 
-    //四角形の複製
+    //四角形の複製 
     container.addEventListener('contextmenu', function(event) {
         event.preventDefault();
         if (event.target.classList.contains('square')) {
