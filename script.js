@@ -25,12 +25,20 @@
         event.preventDefault();
         if (event.target.classList.contains('square')) {
             var newSquare = event.target.cloneNode(true);
-            newSquare.style.top = `${event.clientY - container.offsetTop}px`;
-            newSquare.style.left = `${event.clientX - container.offsetLeft}px`;
+    
+            // 元の square の位置を取得
+            var originalTop = parseInt(window.getComputedStyle(event.target).top, 10); //event.targetが元の四角形でその座標を取得している
+            var originalLeft = parseInt(window.getComputedStyle(event.target).left, 10);
+    
+            // 複製された四角形を元の位置から10pxずらした位置に配置
+            newSquare.style.top = `${originalTop + 10}px`;
+            newSquare.style.left = `${originalLeft + 10}px`;
+    
             container.appendChild(newSquare);
             setDragAndDrop(newSquare);
         }
     });
+    
 
     //マウスが押された際の関数
     function mdown(e) {
